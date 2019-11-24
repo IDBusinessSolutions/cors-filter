@@ -1,4 +1,4 @@
-/**
+/*1
  * Copyright 2012-2013 eBay Software Foundation, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,20 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+/*!
+ * Modifications Copyright (C) 1993-2019 ID Business Solutions Limited
+ * All rights reserved
+ *
+ * Modifications by: vchugunov
+ */
 package org.ebaysf.web.cors;
 
-import java.io.IOException;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import org.junit.Assert;
+import org.junit.Test;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+@SuppressWarnings("JavaDoc")
 public class CORSFilterTest
 {
     private FilterChain filterChain = new MockFilterChain();
@@ -34,9 +40,9 @@ public class CORSFilterTest
     /**
      * Tests if a GET request is treated as simple request.
      *
-     * @See http://www.w3.org/TR/cors/#simple-method
      * @throws IOException
      * @throws ServletException
+     * @See http://www.w3.org/TR/cors/#simple-method
      */
     @Test
     public void testDoFilterSimpleGET() throws IOException, ServletException
@@ -51,25 +57,22 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs.getDefaultFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
      * Tests if a POST request is treated as simple request.
      *
-     * @See http://www.w3.org/TR/cors/#simple-method
      * @throws IOException
      * @throws ServletException
+     * @See http://www.w3.org/TR/cors/#simple-method
      */
     @Test
     public void testDoFilterSimplePOST() throws IOException, ServletException
@@ -85,25 +88,22 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs.getDefaultFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
      * Tests if a HEAD request is treated as simple request.
      *
-     * @See http://www.w3.org/TR/cors/#simple-method
      * @throws IOException
      * @throws ServletException
+     * @See http://www.w3.org/TR/cors/#simple-method
      */
     @Test
     public void testDoFilterSimpleHEAD() throws IOException, ServletException
@@ -118,17 +118,14 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs.getDefaultFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
@@ -152,17 +149,14 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs.getSpecificOriginFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
@@ -187,21 +181,16 @@ public class CORSFilterTest
             .getFilterConfigAnyOriginAndSupportsCredentials());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS)
-            .equals(
-                "true"));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals("true", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
@@ -226,19 +215,16 @@ public class CORSFilterTest
             .getFilterConfigAnyOriginAndSupportsCredentialsDisabled());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.ANY_ORIGIN));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.ANY_ORIGIN);
         Assert.assertNull(response.getHeader(
             CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
@@ -263,20 +249,16 @@ public class CORSFilterTest
             .getFilterConfigWithExposedHeaders());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_EXPOSE_HEADERS)
-            .equals(TestConfigs.EXPOSED_HEADERS));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_EXPOSE_HEADERS), TestConfigs.EXPOSED_HEADERS);
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     /**
@@ -304,20 +286,16 @@ public class CORSFilterTest
             .getSpecificOriginFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase()));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS).equals(
-            "Content-Type"));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
     }
 
     /**
@@ -347,20 +325,16 @@ public class CORSFilterTest
             .getSpecificOriginFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase()));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS).equals(
-            "Content-Type"));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
     }
 
     /**
@@ -413,22 +387,18 @@ public class CORSFilterTest
             .getSpecificOriginFilterConfigNegativeMaxAge());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
         Assert.assertNull(response.getHeader(
             CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_MAX_AGE));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase()));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS).equals(
-            "Content-Type"));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
     }
 
     @Test
@@ -451,23 +421,18 @@ public class CORSFilterTest
             .getSecureFilterConfig());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS)
-            .equals("true"));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals("true", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase()));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS).equals(
-            "Content-Type"));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
     }
 
     @Test
@@ -491,22 +456,18 @@ public class CORSFilterTest
             .getFilterConfigSpecificOriginAndSupportsCredentialsDisabled());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
+        Assert.assertEquals(response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
         Assert.assertNull(response.getHeader(
             CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase()));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS).equals(
-            "Content-Type"));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
     }
 
     /**
@@ -594,17 +555,14 @@ public class CORSFilterTest
         corsFilter.init(null);
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertTrue((Boolean) request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN).equals(
-            TestConfigs.HTTPS_WWW_APACHE_ORG));
-        Assert.assertTrue(request.getAttribute(
-            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE).equals(
-            CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase()));
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), TestConfigs.HTTPS_WWW_APACHE_ORG);
+        Assert.assertEquals(request.getAttribute(
+            CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.SIMPLE.name().toLowerCase());
     }
 
     @Test(expected = ServletException.class)
@@ -988,9 +946,8 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs
             .getFilterConfigAnyOriginAndSupportsCredentialsDisabled());
         corsFilter.doFilter(request, response, filterChain);
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "*"));
+        Assert.assertEquals("*", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertNull(response
             .getHeader(CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
     }
@@ -1217,33 +1174,33 @@ public class CORSFilterTest
     @Test
     public void testJoin()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = ",";
         elements.add("world");
         elements.add("peace");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("world,peace".equals(join));
+        Assert.assertEquals("world,peace", join);
     }
 
     @Test
     public void testJoinSingleElement()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = ",";
         elements.add("world");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("world".equals(join));
+        Assert.assertEquals("world", join);
     }
 
     @Test
     public void testJoinSepNull()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = null;
         elements.add("world");
         elements.add("peace");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("world,peace".equals(join));
+        Assert.assertEquals("world,peace", join);
     }
 
     @Test
@@ -1259,45 +1216,45 @@ public class CORSFilterTest
     @Test
     public void testJoinOneNullElement()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = ",";
         elements.add(null);
         elements.add("peace");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue(",peace".equals(join));
+        Assert.assertEquals(",peace", join);
     }
 
     @Test
     public void testJoinAllNullElements()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = ",";
         elements.add(null);
         elements.add(null);
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("".equals(join));
+        Assert.assertEquals("", join);
     }
 
     @Test
     public void testJoinAllEmptyElements()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = ",";
         elements.add("");
         elements.add("");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("".equals(join));
+        Assert.assertEquals("", join);
     }
 
     @Test
     public void testJoinPipeSeparator()
     {
-        Set<String> elements = new LinkedHashSet<String>();
+        Set<String> elements = new LinkedHashSet<>();
         String separator = "|";
         elements.add("world");
         elements.add("peace");
         String join = CORSFilter.join(elements, separator);
-        Assert.assertTrue("world|peace".equals(join));
+        Assert.assertEquals("world|peace", join);
     }
 
     @Test
@@ -1306,14 +1263,14 @@ public class CORSFilterTest
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.init(TestConfigs
             .getDefaultFilterConfig());
-        Assert.assertTrue(corsFilter.getAllowedHttpHeaders().size() == 6);
-        Assert.assertTrue(corsFilter.getAllowedHttpMethods().size() == 4);
-        Assert.assertTrue(corsFilter.getAllowedOrigins().size() == 0);
+        Assert.assertEquals(6, corsFilter.getAllowedHttpHeaders().size());
+        Assert.assertEquals(4, corsFilter.getAllowedHttpMethods().size());
+        Assert.assertEquals(0, corsFilter.getAllowedOrigins().size());
         Assert.assertTrue(corsFilter.isAnyOriginAllowed());
-        Assert.assertTrue(corsFilter.getExposedHeaders().size() == 0);
+        Assert.assertEquals(0, corsFilter.getExposedHeaders().size());
         Assert.assertTrue(corsFilter.isSupportsCredentials());
-        Assert.assertTrue(corsFilter.getPreflightMaxAge() == 1800);
-        Assert.assertTrue(!corsFilter.isLoggingEnabled());
+        Assert.assertEquals(1800, corsFilter.getPreflightMaxAge());
+        Assert.assertFalse(corsFilter.isLoggingEnabled());
     }
 
     @Test(expected = ServletException.class)
@@ -1330,13 +1287,13 @@ public class CORSFilterTest
     {
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.init(TestConfigs.getEmptyFilterConfig());
-        Assert.assertTrue(corsFilter.getAllowedHttpHeaders().size() == 0);
-        Assert.assertTrue(corsFilter.getAllowedHttpMethods().size() == 0);
-        Assert.assertTrue(corsFilter.getAllowedOrigins().size() == 0);
-        Assert.assertTrue(corsFilter.getExposedHeaders().size() == 0);
+        Assert.assertEquals(0, corsFilter.getAllowedHttpHeaders().size());
+        Assert.assertEquals(0, corsFilter.getAllowedHttpMethods().size());
+        Assert.assertEquals(0, corsFilter.getAllowedOrigins().size());
+        Assert.assertEquals(0, corsFilter.getExposedHeaders().size());
         Assert.assertFalse(corsFilter.isSupportsCredentials());
-        Assert.assertTrue(corsFilter.getPreflightMaxAge() == 0);
-        Assert.assertTrue(!corsFilter.isLoggingEnabled());
+        Assert.assertEquals(0, corsFilter.getPreflightMaxAge());
+        Assert.assertFalse(corsFilter.isLoggingEnabled());
     }
 
     /**
@@ -1349,14 +1306,14 @@ public class CORSFilterTest
     {
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.init(TestConfigs.getNullFilterConfig());
-        Assert.assertTrue(corsFilter.getAllowedHttpHeaders().size() == 6);
-        Assert.assertTrue(corsFilter.getAllowedHttpMethods().size() == 4);
-        Assert.assertTrue(corsFilter.getAllowedOrigins().size() == 0);
+        Assert.assertEquals(6, corsFilter.getAllowedHttpHeaders().size());
+        Assert.assertEquals(4, corsFilter.getAllowedHttpMethods().size());
+        Assert.assertEquals(0, corsFilter.getAllowedOrigins().size());
         Assert.assertTrue(corsFilter.isAnyOriginAllowed());
-        Assert.assertTrue(corsFilter.getExposedHeaders().size() == 0);
+        Assert.assertEquals(0, corsFilter.getExposedHeaders().size());
         Assert.assertTrue(corsFilter.isSupportsCredentials());
-        Assert.assertTrue(corsFilter.getPreflightMaxAge() == 1800);
-        Assert.assertTrue(!corsFilter.isLoggingEnabled());
+        Assert.assertEquals(1800, corsFilter.getPreflightMaxAge());
+        Assert.assertFalse(corsFilter.isLoggingEnabled());
     }
 
     @Test
@@ -1480,9 +1437,8 @@ public class CORSFilterTest
         corsFilter.init(TestConfigs.getFilterConfigDecorateRequestDisabled());
         corsFilter.doFilter(request, response, filterChain);
 
-        Assert.assertTrue(response.getHeader(
-            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN).equals(
-            "https://www.apache.org"));
+        Assert.assertEquals("https://www.apache.org", response.getHeader(
+            CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN));
         Assert.assertNull(request
             .getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
         Assert.assertNull(request
