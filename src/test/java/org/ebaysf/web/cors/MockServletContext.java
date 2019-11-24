@@ -1,12 +1,12 @@
 /**
  * Copyright 2012-2013 eBay Software Foundation, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,127 +15,152 @@
  */
 package org.ebaysf.web.cors;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+public class MockServletContext implements ServletContext
+{
 
-public class MockServletContext implements ServletContext {
-
-    public String getContextPath() {
+    public String getContextPath()
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public ServletContext getContext(String uripath) {
+    public ServletContext getContext(String uripath)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public int getMajorVersion() {
+    public int getMajorVersion()
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public int getMinorVersion() {
+    public int getMinorVersion()
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public String getMimeType(String file) {
+    public String getMimeType(String file)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public Set getResourcePaths(String path) {
+    public Set getResourcePaths(String path)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public URL getResource(String path) throws MalformedURLException {
+    public URL getResource(String path) throws MalformedURLException
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public InputStream getResourceAsStream(String path) {
+    public InputStream getResourceAsStream(String path)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public RequestDispatcher getRequestDispatcher(String path) {
-
-        throw new RuntimeException("Not implemented");
-    }
-
-    public RequestDispatcher getNamedDispatcher(String name) {
-
-        throw new RuntimeException("Not implemented");
-    }
-
-    public Servlet getServlet(String name) throws ServletException {
+    public RequestDispatcher getRequestDispatcher(String path)
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public Enumeration getServlets() {
+    public RequestDispatcher getNamedDispatcher(String name)
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public Enumeration getServletNames() {
+    public Servlet getServlet(String name) throws ServletException
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public void log(String msg) {
+    public Enumeration getServlets()
+    {
+
+        throw new RuntimeException("Not implemented");
+    }
+
+    public Enumeration getServletNames()
+    {
+
+        throw new RuntimeException("Not implemented");
+    }
+
+    public void log(String msg)
+    {
         // NOOP
     }
 
-    public void log(Exception exception, String msg) {
+    public void log(Exception exception, String msg)
+    {
         // NOOP
     }
 
-    public void log(String message, Throwable throwable) {
+    public void log(String message, Throwable throwable)
+    {
         // NOOP
     }
 
-    public String getRealPath(String path) {
+    public String getRealPath(String path)
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public String getServerInfo() {
+    public String getServerInfo()
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public String getInitParameter(String name) {
+    public String getInitParameter(String name)
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public Enumeration getInitParameterNames() {
+    public Enumeration getInitParameterNames()
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public Object getAttribute(String name) {
+    public Object getAttribute(String name)
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public Enumeration getAttributeNames() {
+    public Enumeration getAttributeNames()
+    {
 
         throw new RuntimeException("Not implemented");
     }
 
-    public void setAttribute(String name, Object object) {
+    public void setAttribute(String name, Object object)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public void removeAttribute(String name) {
+    public void removeAttribute(String name)
+    {
         throw new RuntimeException("Not implemented");
     }
 
-    public String getServletContextName() {
+    public String getServletContextName()
+    {
 
         throw new RuntimeException("Not implemented");
     }
