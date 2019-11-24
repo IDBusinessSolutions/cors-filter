@@ -9,3 +9,7 @@ target
 .classpath
 .project
 .settings
+
+.gradle/
+build/
+
