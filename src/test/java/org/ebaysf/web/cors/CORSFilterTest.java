@@ -440,7 +440,7 @@ public class CORSFilterTest
         ServletException
     {
         final String UPPERCASE_REQUEST_ORIGIN = TestConfigs.HTTPS_WWW_APACHE_ORG.toUpperCase();
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletRequest request = new MockHttpServletRequest(UPPERCASE_REQUEST_ORIGIN);
         request.setHeader(CORSFilter.REQUEST_HEADER_ORIGIN, UPPERCASE_REQUEST_ORIGIN);
         request.setHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_METHOD, "PUT");
         request.setHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_HEADERS,"Content-Type");
@@ -1079,7 +1079,7 @@ public class CORSFilterTest
     public void testCheckInvalidOriginNotAllowedSubdomain()
         throws ServletException, IOException
     {
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletRequest request = new MockHttpServletRequest("");
         MockHttpServletResponse response = new MockHttpServletResponse();
         request.setHeader(CORSFilter.REQUEST_HEADER_ORIGIN,
             "http://commons.apache.org");

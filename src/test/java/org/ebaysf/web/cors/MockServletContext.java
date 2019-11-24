@@ -21,14 +21,22 @@
  */
 package org.ebaysf.web.cors;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+import javax.servlet.SessionCookieConfig;
+import javax.servlet.SessionTrackingMode;
+import javax.servlet.descriptor.JspConfigDescriptor;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.EventListener;
+import java.util.Map;
 import java.util.Set;
 
 public class MockServletContext implements ServletContext
@@ -171,4 +179,165 @@ public class MockServletContext implements ServletContext
         throw new RuntimeException("Not implemented");
     }
 
+    @Override
+    public int getEffectiveMajorVersion()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public int getEffectiveMinorVersion()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean setInitParameter(String s, String s1)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String s, String s1)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String s, Servlet servlet)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String s, Class<? extends Servlet> aClass)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public <T extends Servlet> T createServlet(Class<T> aClass) throws ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ServletRegistration getServletRegistration(String s)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Map<String, ? extends ServletRegistration> getServletRegistrations()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String s, String s1)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String s, Filter filter)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String s, Class<? extends Filter> aClass)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public <T extends Filter> T createFilter(Class<T> aClass) throws ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public FilterRegistration getFilterRegistration(String s)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Map<String, ? extends FilterRegistration> getFilterRegistrations()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public SessionCookieConfig getSessionCookieConfig()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void setSessionTrackingModes(Set<SessionTrackingMode> set)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Set<SessionTrackingMode> getDefaultSessionTrackingModes()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Set<SessionTrackingMode> getEffectiveSessionTrackingModes()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void addListener(String s)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public <T extends EventListener> void addListener(T t)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void addListener(Class<? extends EventListener> aClass)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public <T extends EventListener> T createListener(Class<T> aClass) throws ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public JspConfigDescriptor getJspConfigDescriptor()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ClassLoader getClassLoader()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void declareRoles(String... strings)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public String getVirtualServerName()
+    {
+        throw new RuntimeException("Not implemented");
+    }
 }

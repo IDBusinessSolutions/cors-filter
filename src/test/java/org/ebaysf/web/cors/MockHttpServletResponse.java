@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -233,4 +234,21 @@ public class MockHttpServletResponse implements HttpServletResponse
 
     }
 
+    @Override
+    public Collection<String> getHeaders(String s)
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Collection<String> getHeaderNames()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void setContentLengthLong(long l)
+    {
+        throw new RuntimeException("Not implemented");
+    }
 }

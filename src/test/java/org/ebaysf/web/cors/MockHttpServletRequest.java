@@ -21,16 +21,26 @@
  */
 package org.ebaysf.web.cors;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpUpgradeHandler;
+import javax.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -46,6 +56,14 @@ public class MockHttpServletRequest implements HttpServletRequest
     private Map<String, List<String>> headers = new HashMap<String, List<String>>();
     private String method;
     private String contentType;
+    private StringBuffer requestUrl = new StringBuffer();;
+
+    public MockHttpServletRequest() {
+    }
+
+    public MockHttpServletRequest(String requestUrl) {
+        this.requestUrl = new StringBuffer(requestUrl);
+    }
 
     public Object getAttribute(String name)
     {
@@ -339,7 +357,7 @@ public class MockHttpServletRequest implements HttpServletRequest
     public StringBuffer getRequestURL()
     {
 
-        throw new RuntimeException("Not implemented");
+        return requestUrl;
     }
 
     public String getServletPath()
@@ -384,4 +402,93 @@ public class MockHttpServletRequest implements HttpServletRequest
         throw new RuntimeException("Not implemented");
     }
 
+    @Override
+    public String changeSessionId()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean authenticate(HttpServletResponse httpServletResponse) throws IOException, ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void login(String s, String s1) throws ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void logout() throws ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Collection<Part> getParts() throws IOException, ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public Part getPart(String s) throws IOException, ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public <T extends HttpUpgradeHandler> T upgrade(Class<T> aClass) throws IOException, ServletException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public long getContentLengthLong()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public ServletContext getServletContext()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public AsyncContext startAsync() throws IllegalStateException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean isAsyncStarted()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean isAsyncSupported()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public AsyncContext getAsyncContext()
+    {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public DispatcherType getDispatcherType()
+    {
+        throw new RuntimeException("Not implemented");
+    }
 }
