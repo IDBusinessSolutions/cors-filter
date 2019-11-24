@@ -319,8 +319,7 @@ public final class CORSFilter implements Filter
                     + CORSRequestType.PRE_FLIGHT.name().toLowerCase());
         }
 
-        final String origin =
-            request.getHeader(CORSFilter.REQUEST_HEADER_ORIGIN);
+        final String origin = request.getHeader(CORSFilter.REQUEST_HEADER_ORIGIN);
 
         // Section 6.2.2
         if (!isOriginAllowed(origin))
@@ -330,8 +329,7 @@ public final class CORSFilter implements Filter
         }
 
         // Section 6.2.3
-        String accessControlRequestMethod =
-            request.getHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_METHOD);
+        String accessControlRequestMethod = request.getHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_METHOD);
         if (accessControlRequestMethod == null || (!HTTP_METHODS.contains(accessControlRequestMethod.trim())))
         {
             handleInvalidCORS(request, response, filterChain);
@@ -661,10 +659,11 @@ public final class CORSFilter implements Filter
 
     /**
      * Checks if the Origin is allowed to make a CORS request.
+     * Originas comparison is case-insetsitive due to RFC 4343 for DNS 
      *
      * @param origin The Origin.
-     * @return <code>true</code> if origin is allowed; <code>false</code>
-     * otherwise.
+     * @return <code>true</code> if origin is allowed; <code>false</code> otherwise.
+     * @see https://tools.ietf.org/html/rfc4343
      */
     private boolean isOriginAllowed(final String origin)
     {
@@ -673,9 +672,9 @@ public final class CORSFilter implements Filter
             return true;
         }
 
-        // If 'Origin' header is a case-sensitive match of any of allowed
+        // If 'Origin' header is a case-insensitive match of any of allowed
         // origins, then return true, else return false.
-        return allowedOrigins.contains(origin);
+        return allowedOrigins.stream().anyMatch(allowed -> allowed.equalsIgnoreCase(origin));
     }
 
     private void log(String message)

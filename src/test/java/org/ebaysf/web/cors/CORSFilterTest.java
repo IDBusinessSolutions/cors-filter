@@ -436,6 +436,30 @@ public class CORSFilterTest
     }
 
     @Test
+    public void testDoFilterPreflightWithCredentialsUpperCase() throws IOException,
+        ServletException
+    {
+        final String UPPERCASE_REQUEST_ORIGIN = TestConfigs.HTTPS_WWW_APACHE_ORG.toUpperCase();
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setHeader(CORSFilter.REQUEST_HEADER_ORIGIN, UPPERCASE_REQUEST_ORIGIN);
+        request.setHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_METHOD, "PUT");
+        request.setHeader(CORSFilter.REQUEST_HEADER_ACCESS_CONTROL_REQUEST_HEADERS,"Content-Type");
+        request.setMethod("OPTIONS");
+        MockHttpServletResponse response = new MockHttpServletResponse();
+
+        CORSFilter corsFilter = new CORSFilter();
+        corsFilter.init(TestConfigs.getSecureFilterConfig());
+        corsFilter.doFilter(request, response, filterChain);
+
+        Assert.assertEquals(response.getHeader(CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN), UPPERCASE_REQUEST_ORIGIN);
+        Assert.assertEquals("true", response.getHeader(CORSFilter.RESPONSE_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS));
+        Assert.assertTrue((Boolean) request.getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_IS_CORS_REQUEST));
+        Assert.assertEquals(request.getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_ORIGIN), UPPERCASE_REQUEST_ORIGIN);
+        Assert.assertEquals(request.getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_TYPE), CORSFilter.CORSRequestType.PRE_FLIGHT.name().toLowerCase());
+        Assert.assertEquals("Content-Type", request.getAttribute(CORSFilter.HTTP_REQUEST_ATTRIBUTE_REQUEST_HEADERS));
+    }
+
+    @Test
     public void testDoFilterPreflightWithoutCredentialsAndSpecificOrigin()
         throws IOException,
         ServletException
