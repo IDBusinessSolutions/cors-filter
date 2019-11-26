@@ -217,7 +217,7 @@ public final class CORSFilter implements Filter
         {
             String configAllowedOrigins = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_ORIGINS);
             configAllowedOrigins = replaceEnvVars(configAllowedOrigins);
-            
+
             String configAllowedHttpMethods = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_METHODS);
             String configAllowedHttpHeaders = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_HEADERS);
             String configExposedHeaders = filterConfig.getInitParameter(PARAM_CORS_EXPOSED_HEADERS);
@@ -232,9 +232,11 @@ public final class CORSFilter implements Filter
 
 
             if (anyOriginAllowed) {
-                log("CORS Filter initialized for origins: [*]");
+                filterConfig.getServletContext().log(
+                    filterConfig.getFilterName() + " initialized for origins: [*]");
             } else {
-                log("CORS Filter initialized for origins: [" + allowedOrigins.toString() + "]");
+                filterConfig.getServletContext().log(
+                    (filterConfig.getFilterName() + " initialized for origins: [" + allowedOrigins.toString() + "]"));
             }
         }
     }
