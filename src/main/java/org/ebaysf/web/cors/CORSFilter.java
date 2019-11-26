@@ -39,6 +39,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -214,6 +216,8 @@ public final class CORSFilter implements Filter
         if (filterConfig != null)
         {
             String configAllowedOrigins = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_ORIGINS);
+            configAllowedOrigins = replaceEnvVars(configAllowedOrigins);
+            
             String configAllowedHttpMethods = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_METHODS);
             String configAllowedHttpHeaders = filterConfig.getInitParameter(PARAM_CORS_ALLOWED_HEADERS);
             String configExposedHeaders = filterConfig.getInitParameter(PARAM_CORS_EXPOSED_HEADERS);
@@ -862,6 +866,30 @@ public final class CORSFilter implements Filter
         }
 
         return set;
+    }
+
+    private String replaceEnvVars(String configValue)
+    {
+        if (configValue != null)
+        {
+            Pattern envVar = Pattern.compile("\\$\\{([^}]*)}");
+            Matcher matcher = envVar.matcher(configValue);
+
+            log("Replacing env vars in " + configValue);
+            while (matcher.find())
+            {
+                String envKey = matcher.group(1);
+                String evnValue = System.getenv(envKey);
+                log("Got <" + evnValue + "> for key <" + envKey + ">");
+                configValue = configValue.substring(0, matcher.start())
+                    + evnValue
+                    + configValue.substring(matcher.end());
+                matcher.reset(configValue);
+            }
+        }
+
+        log("Replacement complete: " + configValue);
+        return configValue;
     }
 
     /**
